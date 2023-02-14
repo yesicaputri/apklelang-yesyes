@@ -36,19 +36,21 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            
-                            <form action="{{ route('register-store') }}" method="post">
+                            <form action="{{ route('register-store') }}" class="user" method="post">
                             @csrf
-                            <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" name="nama_petugas" class="form-control form-control-user" placeholder="Name">
+                                        <input type="text" name="name" class="form-control form-control-user" placeholder="Name">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="username" name="username" class="form-control form-control-user" id="exampleLastName"
                                             placeholder="Username">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                        <input type="text" name="telp" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Telepon">
+                                    </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" name="password" class="form-control form-control-user" id="exampleInputEmail"
@@ -56,22 +58,14 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" name="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                            id="exampleInputPassword" placeholder="Repeat Password">
                                     </div>
-                                </div>
-                                    <div class="form-group">
-                                        <input type="text" name="telp" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Telepon">
-                                    </div>
+                                </div>  
                                 <button class="btn btn-primary btn-user btn-block">
                                     Register
                                 </button>
                                 <hr>
                             </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
                             <div class="text-center">
                                 <a class="small" href="/login">Already have an account? Login!</a>
                             </div>

@@ -17,25 +17,25 @@ class UserSeeder extends Seeder
         //
         $users = [
             [
-                'nama_petugas'  => 'admin',
+                'name'          => 'admin',
                 'username'      => 'admin',
                 'password'      => bcrypt('admin'),
                 'level'         => 'admin',
-                'telp'          => '0812'
+                'telp'          => '081212122121'
             ],
             [
-                'nama_petugas'  => 'petugas',
+                'name'          => 'petugas',
                 'username'      => 'petugas',
                 'password'      => bcrypt('petugas'),
                 'level'         => 'petugas',
-                'telp'          => '0813'
+                'telp'          => '081313133131'
             ],
             [
-                'nama_petugas'  => 'masyarakat',
+                'name'          => 'masyarakat',
                 'username'      => 'masyarakat',
                 'password'      => bcrypt('masyarakat'),
                 'level'         => 'masyarakat',
-                'telp'          => '0814'
+                'telp'          => '081414144141'
             ]
         ];
         foreach ($users as $key => $value) {

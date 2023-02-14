@@ -42,6 +42,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="image" class="form-label">Gambar Barang</label>
+                    <input class="form-control @error('image')is-invalid @enderror" type="file" id="image" name="image">
+                    @error('image')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                    @enderror
+                  </div>
+
+                <div class="form-group">
                     <label for="deskripsi_barang">Deskripsi Barang</label>
                     <input type="text" name="deskripsi_barang" class="form-control" id="deskripsi_barang" placeholder="Enter Harga Awal" value="{{ $barangs->deskripsi_barang }}" require>
                     @error('deskripsi_barang')

@@ -5,42 +5,44 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Aplikasi Lelang <sup></sup></div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
+            @if (auth()->user()->level == 'petugas')
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse"
-                    aria-expanded="true" aria-controls="collapse">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-                @if (auth()->user()->level == 'petugas')
-                <div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/barang">Barang</a>
-                        <a class="collapse-item" href="/lelang">Lelang</a>
-                    </div>
-                </div>
-                @endif
-                @if (auth()->user()->level == 'admin')
-                <div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/barang">Barang</a>
-                    </div>
-                </div>
-                @endif
-                @if (auth()->user()->level == 'masyarakat')
-                <div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/lelang">Lelang</a>
-                    </div>
-                </div>
-                @endif
+                <a class="nav-link" href="/barang">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Barang</span></a>
+                <a class="nav-link" href="/lelang">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Lelang</span></a>
             </li>
+            @endif
+            @if (auth()->user()->level == 'admin')
+            <li class="nav-item">
+                <a class="nav-link" href="/barang">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Barang</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user">
+                    <i class="fas fa-users"></i>
+                    <span>Data User</span></a>
+            </li>
+            @endif
+
+            @if (auth()->user()->level == 'masyarakat')
+            <li class="nav-item">
+                <a class="nav-link" href="/lelang">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Lelang</span></a>
+            </li>
+            @endif
             
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

@@ -15,14 +15,14 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama_petugas'     => 'required',
+            'name'             => 'required',
             'username'         => 'required',
             'password'         => 'required',
             'telp'             => 'required'
         ]);
 
         User::create([
-            'nama_petugas'     => ($data['nama_petugas']),
+            'name'             => ($data['name']),
             'username'         => ($data['username']),
             'password'         => bcrypt($data['password']),
             'level'            => 'masyarakat',

@@ -25,6 +25,15 @@
                     <input type="text" name="harga_awal" class="form-control" id="harga_awal" placeholder="Harga Awal" value="{{ $barangs->harga_awal }}" disabled>
                 </div>
 
+                @if( $barangs->image )
+                  <div class="form-group">
+                    <label>Gambar Barang :</label>
+                    <br>
+                    <img src="{{ asset('storage/' . $barangs->image)}}" alt="{{ $barangs->nama_barang }}" class="img-fluid mt-3">
+                  </div>
+                  @else
+
+                  @endif
                 <div class="form-group">
                     <label for="deskripsi_barang">Deskripsi Barang</label>
                     <input type="text" name="deskripsi_barang" class="form-control" id="deskripsi_barang" placeholder="Deskripsi Barang" value="{{ $barangs->deskripsi_barang }}" disabled>

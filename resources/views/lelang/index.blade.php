@@ -30,25 +30,21 @@
                     <td>@currency($lelang->harga_akhir)</td>
                     <td>{{ \Carbon\Carbon::parse($lelang->tanggal)->format('j-F-Y') }}</td>
                     <td>
-                      <span class="badge {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span>
+                      <span class="badge text-white {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span>
                     </td>
                     <td>
                       <div class="d-flex flex-nowrap flex-column flex-md-row justify-center">
                         <form action="{{ route('lelang.destroy', $lelang->id) }}" method="POST">
                         <a href="{{ route('lelang.show', $lelang->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
-                          <i class="bi bi-info-square"></i>
-                          Detail
+                          <i class="fa fa-info-circle"></i>
                         </a>
                         <a href="{{ route('lelang.edit', $lelang->id) }}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                          <i class="bi bi-pencil-square"></i>
-                          Edit
+                          <i class="fas fa-edit"></i>
                         </a>
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
-                          <a> Delete
-                          <i class="bi bi-trash"></i>
-                          </a>
+                          <i class="fa fa-trash"></i>
                           </button>
                         </form>
                       </div>

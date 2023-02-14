@@ -17,7 +17,7 @@
                             <div class="form-group mandatory">
                               <label for="barangs_id" class="form-label">{{ __('Nama Barang') }}</label>
                               <select class="form-select form-control @error('barangs_id') is-invalid @enderror" id="barangs_id" name="barangs_id" data-parsley-required="true">
-                                <option value="" disabled>Pilih Barang</option>
+                                <option value="" selected>Pilih Barang</option>
                                 @forelse ($barangs as $item)
                                   <option value="{{ $item->id }}">{{ Str::of($item->nama_barang)->title() }}-{{ Str::of($item->harga_awal)}}</option>
                                 @empty
@@ -52,7 +52,7 @@
                           </div>
                           <div class="row">
                               <div class="col-6 d-flex justify-content-start">
-                                  <a href="{{ route('barang.index') }}" class="btn btn-outline-info me-1 mb-1">
+                                  <a href="/lelang" class="btn btn-outline-info me-1 mb-1">
                                     {{ __('Kembali') }}
                                   </a>
                               </div>

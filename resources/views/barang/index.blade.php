@@ -1,6 +1,16 @@
 @extends('templatesb.master')
 
 @section ('content')
+<style>
+  .card {
+     background-image: url("{{asset('')}}");
+     height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  } 
+</style>    
 <div class="card">
     <div class="card-header">
     <h6>Datang Barang Yang Akan Di Lelang</h6>
@@ -19,6 +29,7 @@
             <th>Nama Barang</th>
             <th>Tanggal</th>
             <th>Harga Awal</th>
+            <th>Gambar</th>
             <th>Deskripsi Barang</th>
             <th>Action</th>
           </tr>
@@ -29,7 +40,12 @@
             <td>{{ $loop->iteration }}</td>
             <td>{{ $value->nama_barang }}</td>
             <td>{{ $value->tgl }}</td>
-            <td>{{ $value->harga_awal }}</td>
+            <td>@currency( $value->harga_awal )</td>
+            <td>
+              @if($value->image)
+                <img src="{{ asset('storage/' . $value->image)}}" alt="{{ $value->nama_barang }}" class="img-fluid mt-3" width="75">
+              @endif
+          </td>
             <td>{{ $value->deskripsi_barang }}</td>
             <td>
             <form action="{{ route('barang.destroy', [$value->id]) }}" method="POST">

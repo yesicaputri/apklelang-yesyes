@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,10 +41,8 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    
-                                    <form action="{{ route('login.proses') }}" method="post">
+                                    <form action="{{ route('login.proses') }}" class="user" method="post">
                                     @csrf
-                                    <form class="user">
                                         <div class="form-group">
                                             <input type="username" name="username" class="form-control form-control-user"
                                                 placeholder="Username">
@@ -65,10 +63,6 @@
                                         </button>
                                         <hr>
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="/register">Create an Account!</a>
                                     </div>

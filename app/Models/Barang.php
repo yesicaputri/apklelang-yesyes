@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Lelang;
 
 class Barang extends Model
 {
@@ -13,6 +14,7 @@ class Barang extends Model
         'nama_barang',
         'tgl',
         'harga_awal',
+        'image',
         'deskripsi_barang'
     ];
 
