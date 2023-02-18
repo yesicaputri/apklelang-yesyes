@@ -11,6 +11,8 @@
                     {{ __('Created') }} : {{ \Carbon\Carbon::parse($barangs[0]->created_at)->format('j-F-Y : H:i') }}
                   </h2>
               </div>
+              <form action="{{ route('barang.show') }}" method="POST">
+                @csrf
               <div class="card-content">
                   <div class="card-body">
                         <div class="row">

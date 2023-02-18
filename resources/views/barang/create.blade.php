@@ -1,7 +1,10 @@
 @extends('templatesb.master')
 
 @section ('content')
-<div class="card card-primary">
+<section id="multiple-column-form">
+  <div class="row match-height">
+      <div class="col-12">
+          <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Add New Barang</h3>
               </div>
@@ -41,13 +44,16 @@
                     <textarea type="text" name="deskripsi_barang"class="form-control"></textarea>
                   </div>
 
+                  <div style="float: right;">
+                  <a href="/barang" class="btn btn-outline-info">Kembali</a>
                   </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
               </form>
             </div>
+        </div>
+      </div>
+    </div>
+</section>
 
 <script>
   function previewImage() {

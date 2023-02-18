@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="harga_awal">Harga Awal</label>
-                    <input type="text" name="harga_awal" class="form-control" id="harga_awal" placeholder="Enter Harga Awal" value="{{ $barangs->harga_awal }}" require>
+                    <input type="text" name="harga_awal" class="form-control" id="harga_awal" placeholder="Enter Harga Awal" value="@currency ($barangs->harga_awal)" require>
                     @error('harga_awal')
                     <div class="alert alert-danger">
                         {{ $message }}
@@ -43,7 +43,7 @@
 
                 <div class="form-group">
                     <label for="image" class="form-label">Gambar Barang</label>
-                    <input class="form-control @error('image')is-invalid @enderror" type="file" id="image" name="image">
+                    <input class="form-control @error('image')is-invalid @enderror" type="file" id="image" name="image" value="{{ $barangs->image }}" require>
                     @error('image')
                     <div class="invalid-feedback">
                       {{ $message }}
@@ -53,7 +53,7 @@
 
                 <div class="form-group">
                     <label for="deskripsi_barang">Deskripsi Barang</label>
-                    <input type="text" name="deskripsi_barang" class="form-control" id="deskripsi_barang" placeholder="Enter Harga Awal" value="{{ $barangs->deskripsi_barang }}" require>
+                    <textarea type="text-area" name="deskripsi_barang" class="form-control" id="deskripsi_barang" value="">{{ $barangs->deskripsi_barang }}</textarea>
                     @error('deskripsi_barang')
                     <div class="alert alert-danger">
                         {{ $message }}
@@ -61,9 +61,6 @@
                     @enderror
                 </div>
                 
-                </select>
-                </div>
-                <!-- /.card-body -->
 
                 <div class="card-footer">
                   <a href="/barang" class="btn btn-primary">
@@ -72,5 +69,5 @@
                 </div>
                 
             </form>      
-        </div>
+</div>
 @endsection

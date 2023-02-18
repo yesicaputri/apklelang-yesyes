@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\HistoryLelang;
+use App\Models\Lelang;
+use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class HistoryLelangController extends Controller
 {
@@ -15,6 +19,8 @@ class HistoryLelangController extends Controller
     public function index()
     {
         //
+        $historyLelangs = HistoryLelang::all();
+        return view('lelang.datapenawaran', compact('historyLelangs'));
     }
 
     /**
@@ -22,9 +28,12 @@ class HistoryLelangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(HistoryLelang $historyLelang, Lelang $lelang)
     {
         //
+        $lelangs = Lelang::find($lelang->id);
+        $historyLelangs = HistoryLelang::all();
+        return view('masyarakat.penawaran', compact('lelangs', 'historyLelangs'));
     }
 
     /**
@@ -36,6 +45,23 @@ class HistoryLelangController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'harga_penawaran'   => 'required|numeric'
+        ],
+        [
+            'harga_penawaran.required'  => "Harus Diisi",
+            'harga_penawaran.numeric'   => "Harus Angka",
+        ]);
+
+        $historyLelang = new Historylelang();
+        $historyLelang->lelang_id = $lelang->id;
+        $historyLelang->nama_barang = $lelang->barang->nama_barang;
+        $historyLelang->users_id = Auth::user()->id;
+        $historyLelang->harga = $request->harga_penawaran;
+        $historyLelang->status = 'pending';
+        $historyLelang->save();
+
+        return redirect()->route('dashboard.masyarakat');
     }
 
     /**

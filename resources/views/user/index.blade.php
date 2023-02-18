@@ -1,39 +1,27 @@
 @extends('templatesb.master')
 
 @section('content')
-<section class="content">
-
-<!-- Default box -->
-<div class="card">
-  <div class="card-header">
+  <div class="card-header bg-primary">
+  </div>
+  <div class="card-body">
     @if (auth()->user()->level == 'admin')
-      <a class="btn btn-primary mb-3"href="/admin/operator/create">
+      <a class="btn btn-primary" href="/admin/operator/create">
         <li class="nav-icon fa fas fa-user-plus"></li>
         Registrasi Operator
       </a>
     @endif
-    <div class="card-tools">
-      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-        <i class="fas fa-minus"></i>
-      </button>
-      <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
   </div>
-  <div class="card-body p-0">
-  <table class="table table-hover">
+<div class="card-body">
+      <table class="table table-bordered table-striped"  id="table1">
         <thead>
-            <tbody>
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Username</th>
-                    <th>Level</th>
-                    <th>Telepon</th>
-                    <th></th>
-                </tr>
-            </tbody>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>Level</th>
+                <th>Telepon</th>
+                <th></th>
+            </tr>
         </thead>
         @foreach ($users as $value)
         <tbody>
@@ -62,18 +50,10 @@
                   </i>
                   Delete
                 </button>
-           </form>
             </td>
         </tr>
         </tbody>
         @endforeach
     </table>
   </div>
-  <!-- /.card-body -->
-  <div class="card-footer">
-    
-  </div>
-  <!-- /.card-footer-->
-</div>
-<!-- /.card -->
 @endsection

@@ -4,12 +4,12 @@
 
 <section class="section">
   <div class="card">
-      <div class="card-header d-flex justify-content-between">
-        <a href="{{ route('lelang.create') }}" class="btn btn-primary btn-md">{{ __('Tambah Lelang') }}</a>
+      <div class="card-header bg-primary d-flex justify-content-between">
+        <a href="{{ route('lelang.create') }}" class="btn btn-info btn-md">{{ __('Tambah Lelang') }}</a>
         <a href="/export/guru" class="btn btn-info ml-auto btn-md">{{ __('Export Barang') }}</a>
-      </div>
+  </div>
       <div class="card-body">
-          <table class="table table-striped" style="width: 100%" id="table1">
+          <table class="table table-bordered table-striped" style="width: 100%" id="table1">
               <thead>
                   <tr>
                       <th>No</th>
@@ -34,11 +34,11 @@
                     </td>
                     <td>
                       <div class="d-flex flex-nowrap flex-column flex-md-row justify-center">
-                        <form action="{{ route('lelang.destroy', $lelang->id) }}" method="POST">
-                        <a href="{{ route('lelang.show', $lelang->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                        <form action="{{ route('barang.destroy', $lelang->id) }}" method="POST">
+                        <a href="{{ route('barang.show', $lelang->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
                           <i class="fa fa-info-circle"></i>
                         </a>
-                        <a href="{{ route('lelang.edit', $lelang->id) }}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                        <a href="{{ route('barang.edit', $lelang->id) }}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                           <i class="fas fa-edit"></i>
                         </a>
                           @csrf

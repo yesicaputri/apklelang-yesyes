@@ -1,18 +1,12 @@
 @extends('templatesb.master')
 
-@section ('content')
-<style>
-  .card {
-     background-image: url("{{asset('')}}");
-     height: 100%;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  } 
-</style>    
+@push('css')
+<link href="{{ asset('admin2/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+@endpush
+
+@section ('content')  
 <div class="card">
-    <div class="card-header">
+    <div class="card-header bg-primary text-white ">
     <h6>Datang Barang Yang Akan Di Lelang</h6>
     </div>
     <div class="card-body">
@@ -29,8 +23,6 @@
             <th>Nama Barang</th>
             <th>Tanggal</th>
             <th>Harga Awal</th>
-            <th>Gambar</th>
-            <th>Deskripsi Barang</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -42,21 +34,15 @@
             <td>{{ $value->tgl }}</td>
             <td>@currency( $value->harga_awal )</td>
             <td>
-              @if($value->image)
-                <img src="{{ asset('storage/' . $value->image)}}" alt="{{ $value->nama_barang }}" class="img-fluid mt-3" width="75">
-              @endif
-          </td>
-            <td>{{ $value->deskripsi_barang }}</td>
-            <td>
             <form action="{{ route('barang.destroy', [$value->id]) }}" method="POST">
-              <a class="btn btn-info mr-3" href="{{ route('barang.show', $value->id) }}">
+              <a class="btn btn-info mr btn-sm" href="{{ route('barang.show', $value->id) }}">
               <i class="fa fa-info-circle"></i>
               Detail</a>
-              <a class="btn btn-warning mr-3" href="{{ route('barang.edit', $value->id) }}">
+              <a class="btn btn-warning mr btn-sm" href="{{ route('barang.edit', $value->id) }}">
               <i class="fas fa-edit"></i>Edit</a>
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm-3">
+                <button type="submit" class="btn btn-danger mr btn-sm">
                 <a>Delete
                 <i class="fa fa-trash"></i>
                 </a>
@@ -70,3 +56,15 @@
       <!-- /.card-body -->
     </div>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('admin2/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('admin2/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('admin2/js/demo/datatables-demo.js') }}"></script>
+<script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
+@endpush

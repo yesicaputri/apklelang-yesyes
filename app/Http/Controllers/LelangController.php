@@ -118,4 +118,18 @@ class LelangController extends Controller
         //
         
     }
+
+    public function listlelang(Lelang $lelang)
+    {
+        $lelangs = Lelang::select('id', 'barangs_id', 'tanggal_lelang', 'harga_akhir', 'status')->get();
+        return view('listlelang.index', compact('lelangs'));
+    }
+
+    public function masyarakatList(Lelang $lelang)
+    {
+         //
+         $lelangs = Lelang::select('id', 'barangs_id', 'tanggal_lelang', 'harga_akhir', 'status')
+         ->get();
+         return view('masyarakat.lelang_list', compact('lelangs'));
+    }
 }
