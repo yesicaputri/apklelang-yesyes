@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Lelang;
+use App\Models\User;
+use App\Models\HistoryLelang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -48,10 +54,10 @@ class BarangController extends Controller
             'deskripsi_barang' => 'required'
         ]);
        
-        if($request->file('image')){
+        if ($request->file('image')) {
             $validateData['image'] = $request->file('image')->store('post-images');
         }
-       
+        $validateData['users_id'] = Auth::id();
         // Barang::create([
         //     'nama_barang' => $request->nama_barang,
         //     'tgl' => $request->tgl,
@@ -98,22 +104,28 @@ class BarangController extends Controller
     public function update(Request $request, Barang $barang)
     {
         //
-        $request->validate([
+        $rules = [
             'nama_barang' => 'required',
             'tgl' => 'required',
             'harga_awal' => 'required',
             'image' => 'image|file',
-            'deskripsi' => 'required',
-        ]);
+            'deskripsi_barang' => 'required',
+        ];
 
-        $barangs = Barang::find($barangs->id);
-        $barangs->nama_barang = Str::lower ($request->nama_barang);
-        $barangs->tgl = $request->tgl;
-        $barangs->harga_awal = $request->harga_awal;
-        $barangs->image = $request->image;
-        $barangs->deskripsi_barang = Str::lower ($request->deskripsi_barang);
-        $barangs->update();
+        $validateData = $request->validate($rules);
+        if ($request->file('image')) {
+            $validateData['image'] = $request->file('image')->store('post-images');
+        }
+        // $barangs = Barang::find($barangs->id);
+        // $barangs->nama_barang = Str::lower ($request->nama_barang);
+        // $barangs->tgl = $request->tgl;
+        // $barangs->harga_awal = $request->harga_awal;
+        // $barangs->image = $request->image;
+        // $barangs->deskripsi_barang = Str::lower ($request->deskripsi_barang);
+        // $barangs->update();
 
+        Barang::where('id', $barang->id)
+               ->update($validateData);
         return redirect('/barang');
     }
 

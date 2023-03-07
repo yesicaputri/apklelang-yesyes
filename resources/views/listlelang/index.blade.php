@@ -6,7 +6,7 @@
     <h6>Datang Barang Yang Akan Di Lelang</h6>
   </div>
       <div class="card-body">
-          <table class="table table-bordered table-striped" id="table1">
+          <table class="table table-bordered table-hover" id="table1">
               <thead>
                   <tr>
                       <th>No</th>
@@ -31,13 +31,7 @@
                     </td>
                     @if (auth()->user()->level == 'masyarakat')
                     <td>
-                      <div class="d-flex flex-nowrap flex-column flex-md-row justify-center">
-                        <!-- <form action="{{ route('lelang.destroy', $lelang->barangs_id) }}" method="POST"> -->
-                        <a href="{{ route('barang.show', $lelang->barangs_id) }}" class="btn btn-info mr-3 btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
-                          <i class="fa fa-info-circle"></i>
-                          Detail
-                        </a>
-                        <a href="{{ route('barang.show', $lelang->barangs_id) }}" class="btn btn-warning mr-3 btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                        <a href="{{ route('lelangin.create', $lelang->id) }}" class="btn btn-warning mr-3 btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Tawar">
                           <i class="fas fa-dollar-sign"></i>
                           Tawar
                         </a>

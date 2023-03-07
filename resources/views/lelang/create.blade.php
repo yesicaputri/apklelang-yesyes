@@ -5,7 +5,7 @@
   <div class="row match-height">
       <div class="col-12">
           <div class="card">
-              <div class="card-header">
+              <div class="card-header bg-primary text-white">
                   <h4 class="card-title">{{ __('Tambah Barang Yang Akan Di Lelang') }}</h4>
               </div>
               <div class="card-content">
@@ -31,21 +31,12 @@
                           </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-12">
+                            <div class="col-12">
                                 <div class="form-group mandatory">
                                     <label for="tanggal" class="form-label">{{ __('Tanggal Lelang') }}</label>
                                     <input type="date" id="tanggal_lelang" class="form-control @error('tanggal_lelang') is-invalid @enderror" name="tanggal_lelang" data-parsley-required="true" value="{{ old('tanggal_lelang') }}">
                                 </div>
                                 @error('tanggal_lelang')
-                                  <div class="alert alert-danger" role="alert">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6 col-12">
-                                <div class="form-group mandatory">
-                                    <label for="harga_awal" class="form-label">{{ __('Harga Akhir') }}</label>
-                                    <input type="text" id="harga_akhir" class="form-control @error('harga_akhir') is-invalid @enderror" placeholder="Input Harga, Hanya Angka" name="harga_akhir" data-parsley-required="true" value="{{ old('harga_akhir') }}">
-                                </div>
-                                @error('harga_akhir')
                                   <div class="alert alert-danger" role="alert">{{ $message }}</div>
                                 @enderror
                             </div>

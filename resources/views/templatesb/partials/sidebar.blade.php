@@ -3,7 +3,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">ApLO <sup></sup></div>
             </a>
@@ -20,16 +20,46 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <hr class="sidebar-divider">
 
+            <div class="sidebar-heading">
+                Data Barang
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="/barang">
                     <i class="fas fa-shopping-cart"></i>
-                    <span>Data Barang</span></a>
-                <a class="nav-link" href="/lelang">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Data Lelang</span></a>
+                    <span>Barang</span></a>
             </li>
+            <hr class="sidebar-divider">
 
+            <div class="sidebar-heading">
+                Data Lelang
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/lelang">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Data Lelang</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                Data Penawaran
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/data-penawaran">
+                    <i class="fas fa-users"></i>
+                    <span>Data Penawar</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                Generate Laporan
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/laporan">
+                    <i class="fas fa-book"></i>
+                    <span>Laporan</span></a>
+            </li>
             
             @endif
             @if (auth()->user()->level == 'admin')
@@ -38,38 +68,78 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <hr class="sidebar-divider">
 
+            <div class="sidebar-heading">
+                Data Barang
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="/barang">
                     <i class="fas fa-shopping-cart"></i>
-                    <span>Data Barang</span></a>
+                    <span>Barang</span></a>
             </li>
+            <hr class="sidebar-divider">
 
+
+            <div class="sidebar-heading">
+                Data User
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="/user">
-                    <i class="fas fa-users"></i>
-                    <span>Data User</span></a>
+                    <i class="fas fa-user"></i>
+                    <span>User</span></a>
             </li>
+            <hr class="sidebar-divider">
 
+
+            <div class="sidebar-heading">
+                Data Lelang
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="/listlelang">
                     <i class="fas fa-clipboard-list"></i>
-                    <span>List Lelang</span></a>
+                    <span>Lelang</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+
+            <div class="sidebar-heading">
+                Data Penawaran
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/data-penawaran">
+                    <i class="fas fa-users"></i>
+                    <span>Penawar</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+
+            <div class="sidebar-heading">
+                Generate Laporan
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/laporan">
+                    <i class="fas fa-book"></i>
+                    <span>Laporan</span></a>
             </li>
             @endif
 
             @if (auth()->user()->level == 'masyarakat')
             <li class="nav-item">
-                <a class="nav-link" href="/listlelang">
-                    <i class="fas fa-clipboard-list"></i>
-                    <span>List Lelang</span></a>
+                <a class="nav-link" href="{{route('dashboard.masyarakat')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
             </li>
+            <hr class="sidebar-divider">
 
+            <!-- <div class="sidebar-heading">
+                Data Penawaran Anda
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="/listlelang">
                     <i class="fas fa-clipboard-list"></i>
-                    <span>Data Penawaran Anda</span></a>
-            </li>
+                    <span>Penawaran Anda</span></a>
+            </li> -->
             @endif
             
             <!-- Divider -->

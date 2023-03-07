@@ -6,17 +6,20 @@
   <div class="card">
       <div class="card-header bg-primary d-flex justify-content-between">
         <a href="{{ route('lelang.create') }}" class="btn btn-info btn-md">{{ __('Tambah Lelang') }}</a>
-        <a href="/export/guru" class="btn btn-info ml-auto btn-md">{{ __('Export Barang') }}</a>
+      <a class="btn btn-info mb-3" href="{{route('cetak.lelang')}}">
+      <li class="fas fa fa-print"></li>
+      Cetak Data
+    </a>
   </div>
       <div class="card-body">
-          <table class="table table-bordered table-striped" style="width: 100%" id="table1">
+          <table class="table table-bordered table-hover" id="table1">
               <thead>
                   <tr>
                       <th>No</th>
                       <th>Nama Barang</th>
                       <th>Harga Awal</th>
-                      <th>Harga Lelang</th>
-                      <th>Tanggal Lelang</th>
+                      <th>Harga Akhir</th>
+                      <th>Pemenang</th>
                       <th>Status</th>
                       <th>Action</th>
                   </tr>
@@ -28,9 +31,9 @@
                     <td>{{ Str::of($lelang->barang->nama_barang)->title() }}</td>
                     <td>@currency($lelang->barang->harga_awal)</td>
                     <td>@currency($lelang->harga_akhir)</td>
-                    <td>{{ \Carbon\Carbon::parse($lelang->tanggal)->format('j-F-Y') }}</td>
+                    <td>{{ $lelang->pemenang }}</td>
                     <td>
-                      <span class="badge text-white {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span>
+                      <span class="badge text-white {{ $lelang->status == 'ditutup' ? 'bg-success' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span>
                     </td>
                     <td>
                       <div class="d-flex flex-nowrap flex-column flex-md-row justify-center">

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\HistoryLelang;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -22,6 +23,7 @@ class User extends Authenticatable
         'username',
         'level',
         'password',
+        'passwordshow',
         'telp'
     ];
 
@@ -43,4 +45,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function historylelang()
+    {
+        return $this->belongsTo(HistoryLelang::class);
+    }
+    public function lelang()
+    {
+        return $this->belongsTo(Lelang::class);
+    }
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
+    }
 }

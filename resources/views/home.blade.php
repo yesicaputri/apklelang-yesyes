@@ -48,7 +48,7 @@
                      <div class="full">
                         <div class="center-desk">
                            <div class="logo">
-                              <a href="index.html"><img src="{{ asset('assetss/images/aplo.png')}}" alt="#" /></a>
+                              <a href="index.html"><img src="{{ asset('assetss/images/aplo3.png')}}" alt="#" /></a>
                            </div>
                         </div>
                      </div>
@@ -67,6 +67,10 @@
                                  @else
                                  <li class="nav-item d_none">
                                  <a class="nav-link" href="/login">Login</a>
+                                 @if (Route::has('register'))
+                                 <li class="nav-item d_none">
+                                 <a class="nav-link" href="/register">Register</a>
+                                 @endif
                               </li>
                               @endauth
                                  @endif
@@ -140,7 +144,7 @@
                         <div class="col-md-4 margin_bottom1">
                            <div class="product_box">
                               <figure><img src="{{ asset('assetss/images/laptop.png') }}" alt="#"/></figure>
-                              <h3>Elektronik</h3>
+                              <h3>Electronic</h3>
                            </div>
                         </div>
                         <div class="col-md-4">
@@ -152,7 +156,7 @@
                         <div class="col-md-4 margin_bottom1">
                            <div class="product_box">
                               <figure><img src="{{ asset('assetss/images/rumah.jpg')}}" alt="#"/></figure>
-                              <h3>Rumah</h3>
+                              <h3>House</h3>
                            </div>
                         </div>
                         <div class="col-md-4 margin_bottom1">
@@ -164,7 +168,7 @@
                         <div class="col-md-4">
                            <div class="product_box">
                               <figure><img src="{{ asset('assetss/images/motor.png')}}" alt="#"/></figure>
-                              <h3>Kendaraan</h3>
+                              <h3>Transpor</h3>
                            </div>
                         </div>
                         <div class="col-md-4 margin_bottom1">
@@ -270,7 +274,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                     <img class="logo1" src="{{ asset('assetss/images/aplo.png') }}" alt="#"/>
+                     <img class="logo1" src="{{ asset('assetss/images/aplo3.png') }}" alt="#"/>
                      <ul class="social_icon">
                         <!-- <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> -->
                         <!-- <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> -->
@@ -281,13 +285,13 @@
                   <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                      <h3>About Us</h3>
                      <ul class="about_us">
-                        <li>dolor sit amet, consectetur<br> magna aliqua. Ut enim ad <br>minim veniam, <br> quisdotempor incididunt r</li>
+                        <li>SMKN 1 Karawang<br> Rekayasa Perangkat Lunak <br>3 <br> Yesica Putri Purba</li>
                      </ul>
                   </div>
                   <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
                      <h3>Contact Us</h3>
                      <ul class="conta">
-                        <li>dolor sit amet,<br> consectetur <br>magna aliqua.<br> quisdotempor <br>incididunt ut e </li>
+                        <li>Jl. Pangkal Perjuangan, RT.05/RW.04,  <br> Tanjungpura, Kec. Karawang Barat, <br>Kab. Karawang, Jawa Barat<br></li>
                      </ul>
                   </div>
                </div>

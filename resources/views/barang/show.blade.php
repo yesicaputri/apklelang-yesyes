@@ -12,7 +12,7 @@
                   <div class="form-group">
                     <label>Gambar Barang :</label>
                     <br>
-                    <img src="{{ asset('storage/' . $barangs->image)}}" alt="{{ $barangs->nama_barang }}" width="img-fluid mt-3">
+                    <img src="{{ asset('storage/' . $barangs->image)}}" alt="{{ $barangs->nama_barang }}" width="68%">
                   </div>
                   @else
 
@@ -22,8 +22,8 @@
         </div>
         <div class="col-md-7">
               <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Detail Page</h3>
+              <div class="card-header bg-primary text-white">
+                <h4 class="card-title">Detail Page</h4>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -36,8 +36,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="tanggal">Tanggal</label>
-                    <input type="date" name="tanggal" class="form-control" id="tanggal" placeholder="Tanggal" value="{{ $barangs->tanggal }}" disabled>
+                    <label for="tgl">Tanggal</label>
+                    <input type="date" name="tgl" class="form-control" id="tgl" placeholder="Tanggal" value="{{ $barangs->tgl }}" disabled>
                 </div>
 
                 <div class="form-group">

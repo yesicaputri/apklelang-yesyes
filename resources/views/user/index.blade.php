@@ -1,6 +1,7 @@
 @extends('templatesb.master')
 
 @section('content')
+<div class="card">
   <div class="card-header bg-primary">
   </div>
   <div class="card-body">
@@ -12,7 +13,7 @@
     @endif
   </div>
 <div class="card-body">
-      <table class="table table-bordered table-striped"  id="table1">
+      <table class="table table-bordered table-hover"  id="table1">
         <thead>
             <tr>
                 <th>No</th>
@@ -32,9 +33,7 @@
             <td>{{ $value->level }}</td>
             <td>{{ $value->telp }}</td>
             <td>
-              <form action="{{ route('user.destroy', [$value->id]) }}"method="POST">
-              {{-- <a href="{{ route('user.show', $value->id)}}"class="btn btn-primary">Detail</a>
-              <a href="{{ route('user.edit', $value->id)}}"class="btn btn-warning">Edit</a> --}}
+              <form action="{{ route('user.destroy', [$value->id]) }}" method="POST">
               <a class="btn btn-primary btn-sm" href="{{ route('user.show', $value->id)}}">
                 <i class="fa fa-info-circle"></i>
                 View
@@ -50,6 +49,7 @@
                   </i>
                   Delete
                 </button>
+              </form>
             </td>
         </tr>
         </tbody>

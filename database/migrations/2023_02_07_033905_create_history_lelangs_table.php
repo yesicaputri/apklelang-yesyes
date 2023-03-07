@@ -13,14 +13,14 @@ class CreateHistoryLelangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('history_lelang', function (Blueprint $table) {
+        Schema::create('history_lelangs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lelang_id');
             $table->foreign('lelang_id')->references('id')->on('lelangs')->onDelete('cascade'); 
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('harga');
-            $table->date('tanggal');
+            $table->string('nama_barang');
             $table->enum('status', ['pending', 'gugur', 'pemenang']);
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -122,6 +123,7 @@ class UserController extends Controller
         //
         $users = User::find($user->id);
         $users->delete();
+        
         return redirect('/user');
     }
 }

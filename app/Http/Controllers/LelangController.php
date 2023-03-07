@@ -17,7 +17,7 @@ class LelangController extends Controller
     public function index()
     {
         //
-        $lelangs = Lelang::select('id', 'barangs_id', 'tanggal_lelang', 'harga_akhir', 'status')->where('status', 'dibuka')->get();
+        $lelangs = Lelang::all();
         return view('lelang.index', compact('lelangs'));
     }
 
@@ -50,7 +50,6 @@ class LelangController extends Controller
             [
                 'barangs_id'         => 'required|exists:barangs,id|unique:lelangs,barangs_id',
                 'tanggal_lelang'    => 'required|date',
-                'harga_akhir'       => 'required|numeric',
             ],
             [
                 'barang_id.required'        => 'Barang Harus Diisi',
@@ -58,14 +57,13 @@ class LelangController extends Controller
                 'barang_id.unique'          => 'Barang Sudah Di Lelang',
                 'tanggal_lelang.required'   => 'Tanggal Lelang Harus Diisi',
                 'tanggal_lelang.date'       => 'Tanggal Lelang Harus Berupa Tanggal',
-                'harga_akhir.required'      => 'Harga Akhir Harus Diisi',
-                'harga_akhir.numeric'       => 'Harga Akhir Harus Berupa Angka',
             ]
         );
         $lelang = new Lelang;
         $lelang->barangs_id = $request->barangs_id;
         $lelang->tanggal_lelang = $request->tanggal_lelang;
-        $lelang->harga_akhir = $request->harga_akhir;
+        $lelang->harga_akhir = '0';
+        $lelang->pemenang = 'Belum Ada';
         $lelang->users_id = Auth::user()->id;
         $lelang->status = 'dibuka';
         $lelang->save();

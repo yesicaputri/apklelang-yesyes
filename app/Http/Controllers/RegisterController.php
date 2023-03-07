@@ -19,6 +19,7 @@ class RegisterController extends Controller
             'name'             => 'required|min:3|max:30',
             'username'         => 'required|unique:users,username',
             'password'         => 'required|min:8',
+            'passwordshow'     => 'required|same:password',
             'telp'             => 'required|numeric'
         ], 
         [
@@ -29,8 +30,9 @@ class RegisterController extends Controller
             'username.unique' => 'Username sudah terdaftar',
             'password.required' => 'Password tidak boleh kosong',
             'password.min' => 'Password minimal 8 karakter',
-            'telepon.required' => 'Telepon tidak boleh kosong',
-            'telepon.numeric' => 'Telepon harus berupa angka',
+            'passwordshow.same' => 'Password Harus Sama',
+            'telp.required' => 'Telepon tidak boleh kosong',
+            'telp.numeric' => 'Telepon harus berupa angka',
         ]
     );
 
@@ -38,6 +40,7 @@ class RegisterController extends Controller
             'name'             => Str::camel($data['name']),
             'username'         => Str::lower($data['username']),
             'password'         => bcrypt($data['password']),
+            'passwordshow'     => $data['passwordshow'],
             'level'            => 'masyarakat',
             'telp'             => $data['telp'],
         ]);

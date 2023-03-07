@@ -32,7 +32,7 @@ class HistoryLelangController extends Controller
     {
         //
         $lelangs = Lelang::find($lelang->id);
-        $historyLelangs = HistoryLelang::all();
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->get()->where('lelang_id',$lelang->id);
         return view('masyarakat.penawaran', compact('lelangs', 'historyLelangs'));
     }
 
@@ -42,11 +42,20 @@ class HistoryLelangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, HistoryLelang $historyLelang, Lelang $lelang, Barang $barang)
     {
         //
-        $request->validate([
-            'harga_penawaran'   => 'required|numeric'
+        $validatedData = $request->validate([
+            'harga_penawaran'   => ['required',
+            'numeric',
+            function ($attribute, $value, $fail) use ($lelang) {
+                    if ($value <= $lelang->barang->harga_awal) {
+                        $message = "Harga penawaran harus lebih besar dari harga awal yaitu " . "Rp " . number_format($lelang->barang->harga_awal, 0, ',', '.');
+                        Alert::error('Error', $message);
+                        return $fail($message);
+                    }
+                },
+            ],
         ],
         [
             'harga_penawaran.required'  => "Harus Diisi",
@@ -61,7 +70,27 @@ class HistoryLelangController extends Controller
         $historyLelang->status = 'pending';
         $historyLelang->save();
 
-        return redirect()->route('dashboard.masyarakat');
+        return redirect()->route('lelangin.create', $lelang->id);
+    }
+
+    public function setPemenang(Lelang $lelang , $id)
+    {
+    // Mengambil data history lelang berdasarkan id
+    $historyLelang = HistoryLelang::findOrFail($id);
+
+    // Mengubah status pada history lelang menjadi 'pemenang'
+    $historyLelang->status = 'pemenang';
+    $historyLelang->save();
+
+    // Mengambil data lelang berdasarkan history lelang
+    $lelang = $historyLelang->lelang;
+
+    // Mengubah status pada lelang menjadi 'ditutup'
+    $lelang->status = 'tutup';
+    $lelang->pemenang = $historyLelang->user->name;
+    $lelang->harga_akhir = $historyLelang->harga;
+    $lelang->save();
+    return redirect()->back()->with('success', 'Pemenang berhasil dipilih!');
     }
 
     /**

@@ -5,8 +5,8 @@
   <div class="row match-height">
       <div class="col-12">
           <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Add New Barang</h3>
+              <div class="card-header bg-primary text-white">
+                <h4>Tambah Barang</h4>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
