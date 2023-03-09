@@ -19,7 +19,11 @@ class MasyarakatController extends Controller
     public function index()
     {
         //
-        
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->get()->where('users_id',Auth::user()->id);
+        $lelangs = Lelang::all();
+        $barangs = Barang::all();
+        $users = User::all();
+        return view('masyarakat.index', compact('users','historyLelangs','lelangs','barangs'));
     }
 
     /**

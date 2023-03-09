@@ -1,7 +1,8 @@
 @extends('templatesb.master')
 
 @section('content')
-@if($lelangs->status == 'ditutup')
+<div class="card">
+@if($lelangs->status == 'tutup')
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">Selamat kepada <strong>{{ $lelangs->pemenang }}</strong></h5>
@@ -9,41 +10,10 @@
   </div>
 </div>
 @endif
+</div>
+<br>
+
 <section class="content">
-  @if(session()->has('success'))
-  <div class="form-group">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="alert alert-success" role="alert">
-          {{session('success')}}
-          <li class="fas fa-check-circle"></li>
-        </div>
-      </div>
-    </div>
-  </div>
-  @elseif(session()->has('editsuccess'))
-  <div class="form-group">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="alert alert-success" role="alert">
-          {{session('editsuccess')}}
-          <li class="fas fa-check-circle"></li>
-        </div>
-      </div>
-    </div>
-  </div>
-  @elseif(session()->has('deletesuccess'))
-  <div class="form-group">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="alert alert-success" role="alert">
-          {{session('deletesuccess')}}
-          <li class="fas fa-check-circle"></li>
-        </div>
-      </div>
-    </div>
-  </div>
-  @endif
     <div class="container-fluid">     
         @if(!empty($lelangs))
       <div class="row">
@@ -51,6 +21,7 @@
           <!-- Profile Image -->
           <div class="card card-primary card-outline">
             <div class="card-body box-profile">
+            <span class="badge {{ $lelangs->status == 'tutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelangs->status) }}</span>
               <div class="text-center">
                @if($lelangs->barang->image)
                 <img class="img-fluid mt-3" src="{{ asset('storage/' . $lelangs->barang->image)}}" alt="User profile picture">
@@ -134,11 +105,13 @@
                         </div>
                       </div>
                       </div>
+                      @if($lelangs->status == 'dibuka')
                       <div class="form-group row">
                         <div class="">
                           <button type="button" data-toggle="modal" data-target="#modal-sl" class="btn btn-primary">Tawarkan</button>
                         </div>
                      </div>
+                     @endif
                      <div class="modal fade" id="modal-sl">
                       <div class="modal-dialog modal-sl">
                         <div class="modal-content">
@@ -228,7 +201,7 @@
                 <td>@currency($item->harga)</td>
                 <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
                 <td>
-                  <span class="badge {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span>
+                  <td><span class="badge text-white {{ $item->status == 'pending' ? 'bg-warning' : ($item->status == 'gugur' ? 'bg-danger' : 'bg-success') }}">{{ Str::title($item->status) }}</span></td>
                 </td>
                 @if (auth()->user()->level == 'admin')
                 <td>

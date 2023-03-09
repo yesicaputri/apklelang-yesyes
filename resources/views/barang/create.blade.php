@@ -25,6 +25,10 @@
 
                   <div class="form-group">
                     <label for="harga_awal">Harga Awal</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><strong>Rp.</strong></span>
+                      </div>
                     <input type="text" name="harga_awal" class="form-control" id="harga_awal" placeholder="Harga Awal">
                   </div>
 
@@ -44,10 +48,32 @@
                     <textarea type="text" name="deskripsi_barang"class="form-control"></textarea>
                   </div>
 
-                  <div style="float: right;">
-                  <a href="/barang" class="btn btn-outline-info">Kembali</a>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-sm">
+                    Submit
+                  </button>
+                  <div class="modal fade" id="modal-sm">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Tambah Data</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Apa kamu yakin untuk create data ini?</p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+  
+                          <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <!-- <div style="float: right;"> -->
+                  <a href="/barang" class="btn btn-outline-info">Kembali</a>
+                  <!-- </div> -->
               </form>
             </div>
         </div>

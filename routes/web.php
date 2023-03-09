@@ -9,6 +9,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\HistoryLelangController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\MasyarakatController;
 
 
 /*
@@ -56,6 +58,9 @@ Route::get('dashboard/masyarakat', [Dashboard::class, 'masyarakat'])->name('dash
 Route::get('/dashboard/masyarakat/listlelang', [ListController::class, 'index'])->name('listlelang.index')->middleware('auth', 'level:masyarakat');
 Route::get('listlelang', [ListController::class, 'index'])->name('listlelang.index')->middleware('auth', 'level:admin,petugas,masyarakat');
 
+//ROUTE MASYARAKAT CONTROLLER
+Route::get('data-penawaran-anda', [MasyarakatController::class, 'index'])->name('masyarakatlelang.index')->middleware('auth', 'level:masyarakat');
+
 // ROUTE BARANG LEVEL ADMIN DAN PETUGAS
 Route::middleware(['auth', 'level:admin,petugas'])->group(function () {
     Route::controller(BarangController::class)->group(function() {
@@ -81,9 +86,9 @@ Route::controller(LelangController::class)->group(function() {
     Route::delete('lelang/{lelang}', 'destroy')->name('lelang.destroy')->middleware('auth', 'level:petugas');
     Route::get('/petugas/lelang/{lelang}', 'show')->name('lelangpetugas.show')->middleware('auth','level:petugas');
     Route::put('/petugas/lelang/{lelang}', 'update')->name('lelang.update')->middleware('auth','level:petugas');
-    Route::delete('/petugas/lelang/', 'destroy')->name('lelang.destroy')->middleware('auth','level:petugas');
-    Route::get('lelang/masyarakat', 'index')->name('lelang.index')->middleware('auth', 'level:masyarakat');
     Route::get('/cetak-lelang', 'cetaklelang')->name('cetak.lelang')->middleware('auth','level:admin,petugas');
+    Route::get('/cetak-lelang', 'cetaklelang')->name('cetak.lelang')->middleware('auth','level:admin,petugas');
+Route::get('/cetak-penawaran/{lelang}', 'cetakpenawaran')->name('cetak.penawaran')->middleware('auth','level:admin,petugas');
 });
 
 // ROUTE HISTORY LELANG
@@ -93,7 +98,10 @@ Route::controller(HistoryLelangController::class)->group(function() {
     Route::post('/menawar/{lelang}', 'store')->name('lelangin.store')->middleware('auth','level:masyarakat');
     Route::put('/lelangpetugas/{id}/pemenang', 'setPemenang')->name('lelangpetugas.setpemenang')->middleware('auth','level:petugas');
     Route::delete('/data-penawaran/{lelang}', 'destroy')->name('lelangin.destroy')->middleware('auth','level:petugas');
+    Route::get('cetak-history', 'cetakhistory')->name('cetak.history')->middleware('auth','level:petugas,admin');
+
 });
+Route::get('generate-pdf', [LaporanController::class, 'generatePdf'])->name('generatePdf');
 
 // ROUTE ERROR
 Route::view('error/403', 'error.403')->name('error.403');

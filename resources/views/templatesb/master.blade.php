@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>ApLO</title>
+    <link rel="icon" type="images/png" href="{{ asset('admin2/img/aplo3.png')}}" />
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('admin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">

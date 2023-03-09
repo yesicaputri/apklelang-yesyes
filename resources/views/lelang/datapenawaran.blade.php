@@ -3,7 +3,15 @@
 @section('content') 
 <div class="card">
 <div class="card-header bg-primary text-white">
-    <h4>Daftar Orang Yang Menawar</h4>
+    <h4>Daftar Orang Yang Melakukan Penawaran</h4>
+    <a href="{{route('cetak.history')}}" target="_blank"class="btn btn-info">
+        <li class="fas fa fa-print"></li>
+        Cetak Data
+    </a>
+    <!-- <a href="{{route('generatePdf')}}" target="_blank"class="btn btn-info">
+        <li class="fas fa fa-print"></li>
+        Download Data
+    </a> -->
 </div>
 <div class="card-body">
   <table class="table table-bordered table-hover">
@@ -34,17 +42,19 @@
             <td>{{ $item->nama_barang }}</td>
             <td>@currency($item->harga)</td>
             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
-            <td>
-              <span class="badge {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span>
-            </td>
+            <td><span class="badge text-white {{ $item->status == 'pending' ? 'bg-warning' : ($item->status == 'gugur' ? 'bg-danger' : 'bg-success') }}">{{ Str::title($item->status) }}</span></td>
             @if (auth()->user()->level == 'admin')
             
             @endif
             @if (auth()->user()->level == 'petugas')
+            @if($item->status == 'pemenang')
+            @elseif($item->status == 'gugur')
+            @else
             <td>
             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-sm">
-            <i class="fas fa-crown"></i>
-                  </button>
+                <i class="fas fa-crown"></i>
+            </button>
+            @endif
                   <div class="modal fade" id="modal-sm">
                     <div class="modal-dialog modal-sm">
                       <div class="modal-content">

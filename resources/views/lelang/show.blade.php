@@ -24,13 +24,10 @@
         <!-- /.col -->
         <div class="col-md-7">
           <div class="card">
-            <div class="card-header p-2">
+            <div class="card-header bg-primary text-white">
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#details" data-toggle="tab">Details Barang</a></li>
-                    @if( Auth::user()->level == 'masyarakat')
-                    <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">Tawar</a></li>
-                    @else
-                    @endif
+                <h4 class="card-title">Detail Page</h4>
+                    
                 </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -53,63 +50,49 @@
                   </div>
                   @else
                   @endif
-                <div class="tab-pane active" id="details">
-                  <form class="form-horizontal">
+                    <div class="card-body">
                     <div class="form-group">
-                      <label for="inputName">Nama Barang</label>
-                      <div class="col-sm-12">
-                        <input type="text" class="form-control" id="inputName" value="{{ $lelangs->barang->nama_barang}}"disabled>
-                      </div>
+                      <label for="nama_barang">Nama Barang</label>
+                        <input type="text" name="nama_barang" class="form-control" id="nama_barang" value="{{ $lelangs->barang->nama_barang}}" disabled>
                     </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail">Harga Awal</label>
-                        <div class="col-sm-12">
-                          <input type="text" class="form-control" id="inputEmail" value="@currency($lelangs->barang->harga_awal)"disabled>
-                        </div>
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail">Harga akhir</label>
-                        <div class="col-sm-12">
-                          <input type="text" class="form-control" id="inputEmail" value="@currency($lelangs->harga_akhir)"disabled>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-9">
-                          <label for="inputName2">Tanggal Lelang</label>
-                           <div class="col-sm-12">
-                            <input type="text" class="form-control" id="inputName2" value="{{ \Carbon\Carbon::parse($lelangs->tanggal_lelang)->format('j F Y')}}" disabled>
-                           </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="inputEmail">Status</label>
-                            <div class="col-sm-12">
-                             <input type="text" class="form-control" id="inputEmail" value="{{ $lelangs->status}}"disabled>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
+                      <label for="inputEmail">Harga Awal</label>
+                        <input type="text" class="form-control" id="inputEmail" value="@currency($lelangs->barang->harga_awal)"disabled>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputEmail">Harga akhir</label>
+                        <input type="text" class="form-control" id="inputEmail" value="@currency($lelangs->harga_akhir)"disabled>
+                    </div>
+                    
+                      <div class="form-group">
+                        <label for="inputName2">Tanggal Lelang</label>
+                          <input type="text" class="form-control" id="inputName2" value="{{ \Carbon\Carbon::parse($lelangs->tanggal_lelang)->format('j F Y')}}" disabled>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="inputEmail">Status</label>
+                            <input type="text" class="form-control" id="inputEmail" value="{{ $lelangs->status}}"disabled>
+                      </div>
+
+                      <div class="form-group">
                       <label for="inputEmail">Pemenang Lelang</label>
-                        <div class="col-sm-12">
                          <input type="text" class="form-control" id="inputEmail" value="{{ $lelangs->pemenang}}"disabled>
-                        </div>
                     </div>
+
                     <div class="form-group">
                       <label for="inputExperience">Deskripsi Barang</label>
-                      <div class="col-sm-12">
                         <textarea class="form-control" id="inputExperience" disabled>{{ $lelangs->barang->deskripsi_barang}}</textarea>
-                      </div>
                     </div>
                     @if(auth()->user()->level == 'admin')
-                      <a href="{{route('lelangadmin.index')}}" class="btn btn-outline-info">Kembali</a>
+                      <a href="{{route('lelang.index')}}" class="btn btn-outline-info">Kembali</a>
                         @elseif(auth()->user()->level == 'masyarakat')
                           <a href="{{route('dashboard.masyarakat')}}" class="btn btn-outline-info">Kembali</a>
                         @elseif(auth()->user()->level == 'petugas')
-                          <a href="{{ route('lelangpetugas.index')}}" class="btn btn-outline-info">Kembali</a>
+                          <a href="{{ route('lelang.index')}}" class="btn btn-outline-info">Kembali</a>
                     @endif
-                  </form>
-                </div>
+                  
                 <!-- /.tab-pane -->
               </div>
               <!-- /.tab-content -->
@@ -131,20 +114,13 @@
       @endif
       <!-- /.row -->
     </div><!-- /.container-fluid -->
+    <br>
     <div class="card">
-      <div class="card-header">
+      <div class="card-header bg-primary">
         <a href="{{route('cetak.penawaran', $lelangs->id)}}" target="_blank" class="btn btn-info mb-3">
       <li class="fas fa fa-print"></li>
           Cetak Data
         </a>
-      <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-          <i class="fas fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
     </div>
     <div class="card-body table-responsive p-0">
     <table class="table table-hover">
@@ -173,31 +149,34 @@
               <td>{{ $item->lelang->barang->nama_barang }}</td>
               <td>@currency($item->harga)</td>
               <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
-              <td>
-                <span class="badge {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span>
-              </td>
+              <td><span class="badge text-white {{ $item->status == 'pending' ? 'bg-warning' : ($item->status == 'gugur' ? 'bg-danger' : 'bg-success') }}">{{ Str::title($item->status) }}</span></td>
               @if(Auth::user()->level == 'petugas')
-              <td>
-                  <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#konfirmasiModal">
-                    <i class="fas fa-check"></i> Pilih Jadi Pemenang
-                  </button>
-                  <div class="modal fade" id="konfirmasiModal" tabindex="-1" aria-labelledby="konfirmasiModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+              @if($item->status == 'pemenang')
+            @elseif($item->status == 'gugur')
+            @else
+            <td>
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-sm">
+                <i class="fas fa-crown"></i>
+            </button>
+            @endif
+                  <div class="modal fade" id="modal-sm">
+                    <div class="modal-dialog modal-sm">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="konfirmasiModalLabel">Konfirmasi Pemenang Lelang</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <h4 class="modal-title">Konfirmasi Pemenang Lelang</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
                         </div>
                         <div class="modal-body">
-                          Apakah Anda yakin ingin memilih ini sebagai pemenang lelang?
+                          <p>Apakah Anda yakin ingin memilih ini sebagai pemenang lelang?</p>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
                           <form action="{{ route('lelangpetugas.setpemenang', $item->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit" class="btn btn-success">Ya, Pilih</button>
-                          </form>
+                          @csrf
+                          @method('PUT')
+                          <button type="submit" class="btn btn-success">Ya, Pilih</button>
                         </div>
                       </div>
                     </div>
@@ -216,9 +195,6 @@
     </div>
     <!-- /.card-body -->
     <!-- /.card-footer-->
-  </div>
-      <br>
     </div>  
   </section>
-@endsection
 @endsection

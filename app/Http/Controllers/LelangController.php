@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Lelang;
+use App\Models\HistoryLelang;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +20,19 @@ class LelangController extends Controller
     {
         //
         $lelangs = Lelang::all();
-        return view('lelang.index', compact('lelangs'));
+        $barangs = Barang::select('id', 'nama_barang', 'harga_awal')
+                    ->whereNotIn('id', function($query)
+                    {
+                        $query->select('barangs_id')->from('lelangs');
+                    })->get();
+        return view('lelang.index', compact('lelangs', 'barangs'));
+    }
+
+    public function cetaklelang()
+    {
+        //
+        $cetaklelangs = Lelang::all();
+        return view('lelang.cetaklelang', compact('cetaklelangs'));
     }
 
     /**
@@ -30,10 +44,10 @@ class LelangController extends Controller
     {
         //
         $barangs = Barang::select('id', 'nama_barang', 'harga_awal')
-        ->whereNotIn('id', function($query)
-        {
-            $query->select('barangs_id')->from('lelangs');
-        })->get();
+                    ->whereNotIn('id', function($query)
+                    {
+                        $query->select('barangs_id')->from('lelangs');
+                    })->get();
         return view('lelang.create', compact('barangs'));
     }
 
@@ -57,8 +71,7 @@ class LelangController extends Controller
                 'barang_id.unique'          => 'Barang Sudah Di Lelang',
                 'tanggal_lelang.required'   => 'Tanggal Lelang Harus Diisi',
                 'tanggal_lelang.date'       => 'Tanggal Lelang Harus Berupa Tanggal',
-            ]
-        );
+            ]);
         $lelang = new Lelang;
         $lelang->barangs_id = $request->barangs_id;
         $lelang->tanggal_lelang = $request->tanggal_lelang;
@@ -80,6 +93,26 @@ class LelangController extends Controller
     public function show(Lelang $lelang)
     {
         //
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->get()->where('lelang_id',$lelang->id);
+        $lelangs = Lelang::find($lelang->id);
+        return view('lelang.show', compact('lelangs','historyLelangs'));
+    }
+
+    public function cetakpenawaran(Lelang $lelang, $status = null)
+    {
+    $lelangs = Lelang::find($lelang->id);
+    
+    if($status == 'pemenang'){
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->where('lelang_id',$lelang->id)->where('status', 'pemenang')->get();
+    } elseif($status == 'pending') {
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->where('lelang_id',$lelang->id)->where('status', 'pending')->get();
+    } elseif($status == 'gugur') {
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->where('lelang_id',$lelang->id)->where('status', 'gugur')->get();
+    } else {
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->where('lelang_id',$lelang->id)->get();
+    }
+    
+    return view('lelang.cetakdatapenawaran', compact('lelangs','historyLelangs'));
     }
 
     /**
@@ -114,12 +147,20 @@ class LelangController extends Controller
     public function destroy(Lelang $lelang)
     {
         //
+        // $lelangs = Lelang::find($lelang->id);
+
+        // if ($lelangs) {
+        //     $lelangs->delete();
+        //     return redirect()->route('lelangpetugas.index');
+        // } else {
+        //     return redirect()->route('lelangpetugas.index');
+        // }
         
     }
 
     public function listlelang(Lelang $lelang)
     {
-        $lelangs = Lelang::select('id', 'barangs_id', 'tanggal_lelang', 'harga_akhir', 'status')->get();
+        $lelangs = Lelang::all();
         return view('listlelang.index', compact('lelangs'));
     }
 

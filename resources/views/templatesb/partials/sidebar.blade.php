@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/barang">
                     <i class="fas fa-shopping-cart"></i>
-                    <span>Barang</span></a>
+                    <span>Data Barang</span></a>
             </li>
             <hr class="sidebar-divider">
 
@@ -48,19 +48,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/data-penawaran">
                     <i class="fas fa-users"></i>
-                    <span>Data Penawar</span></a>
+                    <span>Data Penawaran</span></a>
             </li>
-            <hr class="sidebar-divider">
 
-            <div class="sidebar-heading">
-                Generate Laporan
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="/laporan">
-                    <i class="fas fa-book"></i>
-                    <span>Laporan</span></a>
-            </li>
-            
             @endif
             @if (auth()->user()->level == 'admin')
             <li class="nav-item">
@@ -76,7 +66,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/barang">
                     <i class="fas fa-shopping-cart"></i>
-                    <span>Barang</span></a>
+                    <span>Data Barang</span></a>
             </li>
             <hr class="sidebar-divider">
 
@@ -87,12 +77,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="/user">
                     <i class="fas fa-user"></i>
-                    <span>User</span></a>
+                    <span> Data User</span></a>
             </li>
             <hr class="sidebar-divider">
 
 
-            <div class="sidebar-heading">
+            <!-- <div class="sidebar-heading">
                 Data Lelang
             </div>
             <li class="nav-item">
@@ -100,7 +90,7 @@
                     <i class="fas fa-clipboard-list"></i>
                     <span>Lelang</span></a>
             </li>
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider"> -->
 
 
             <div class="sidebar-heading">
@@ -109,19 +99,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="/data-penawaran">
                     <i class="fas fa-users"></i>
-                    <span>Penawar</span></a>
+                    <span>Data Penawaran</span></a>
             </li>
-            <hr class="sidebar-divider">
 
 
-            <div class="sidebar-heading">
-                Generate Laporan
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="/laporan">
-                    <i class="fas fa-book"></i>
-                    <span>Laporan</span></a>
-            </li>
             @endif
 
             @if (auth()->user()->level == 'masyarakat')
@@ -132,14 +113,14 @@
             </li>
             <hr class="sidebar-divider">
 
-            <!-- <div class="sidebar-heading">
+            <div class="sidebar-heading">
                 Data Penawaran Anda
             </div>
             <li class="nav-item">
-                <a class="nav-link" href="/listlelang">
+                <a class="nav-link" href="/data-penawaran-anda">
                     <i class="fas fa-clipboard-list"></i>
                     <span>Penawaran Anda</span></a>
-            </li> -->
+            </li>
             @endif
             
             <!-- Divider -->

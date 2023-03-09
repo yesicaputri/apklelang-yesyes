@@ -18,6 +18,7 @@ class Lelang extends Model
         'users_id',
         'harga_akhir',
         'tanggal_lelang',
+        'pemenang',
         'status'
     ];
 

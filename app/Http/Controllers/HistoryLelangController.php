@@ -23,6 +23,25 @@ class HistoryLelangController extends Controller
         return view('lelang.datapenawaran', compact('historyLelangs'));
     }
 
+    public function laporanlelang()
+    {
+        //
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->get();
+        return view('lelang.datapenawaran', compact('historyLelangs'));
+    }
+    public function laporanhistory()
+    {
+        //
+        $historyLelangs = HistoryLelang::orderBy('harga', 'desc')->get();
+        return view('lelang.datapenawaran', compact('historyLelangs'));
+    }
+    public function cetakhistory()
+    {
+        //
+        $cetakhistoryLelangs = HistoryLelang::orderBy('harga', 'desc')->get();
+        return view('lelang.cetakhistory', compact('cetakhistoryLelangs'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -51,7 +70,6 @@ class HistoryLelangController extends Controller
             function ($attribute, $value, $fail) use ($lelang) {
                     if ($value <= $lelang->barang->harga_awal) {
                         $message = "Harga penawaran harus lebih besar dari harga awal yaitu " . "Rp " . number_format($lelang->barang->harga_awal, 0, ',', '.');
-                        Alert::error('Error', $message);
                         return $fail($message);
                     }
                 },
@@ -81,6 +99,10 @@ class HistoryLelangController extends Controller
     // Mengubah status pada history lelang menjadi 'pemenang'
     $historyLelang->status = 'pemenang';
     $historyLelang->save();
+    HistoryLelang::where('lelang_id', $historyLelang->lelang_id)
+    ->where('status', 'pending')
+    ->where('id', '<>', $historyLelang->id)
+    ->update(['status' => 'gugur']);
 
     // Mengambil data lelang berdasarkan history lelang
     $lelang = $historyLelang->lelang;
@@ -136,5 +158,7 @@ class HistoryLelangController extends Controller
     public function destroy(HistoryLelang $historyLelang)
     {
         //
+        $historyLelang->delete();
+        return redirect()->route('datapenawar.index');
     }
 }

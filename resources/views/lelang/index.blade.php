@@ -5,11 +5,11 @@
 <section class="section">
   <div class="card">
       <div class="card-header bg-primary d-flex justify-content-between">
-        <a href="{{ route('lelang.create') }}" class="btn btn-info btn-md">{{ __('Tambah Lelang') }}</a>
+        <a href="{{ route('lelang.create') }}" class="btn btn-info mb-3">{{ __('Tambah Lelang') }}</a>
       <a class="btn btn-info mb-3" href="{{route('cetak.lelang')}}">
       <li class="fas fa fa-print"></li>
       Cetak Data
-    </a>
+      </a>
   </div>
       <div class="card-body">
           <table class="table table-bordered table-hover" id="table1">
@@ -33,25 +33,42 @@
                     <td>@currency($lelang->harga_akhir)</td>
                     <td>{{ $lelang->pemenang }}</td>
                     <td>
-                      <span class="badge text-white {{ $lelang->status == 'ditutup' ? 'bg-success' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span>
+                      <span class="badge text-white {{ $lelang->status == 'tutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span>
                     </td>
+                    @if (auth()->user()->level == 'admin')
                     <td>
-                      <div class="d-flex flex-nowrap flex-column flex-md-row justify-center">
-                        <form action="{{ route('barang.destroy', $lelang->id) }}" method="POST">
-                        <a href="{{ route('barang.show', $lelang->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                        <a href="{{ route('lelang.show', $lelang->id) }}" class="btn btn-info btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
                           <i class="fa fa-info-circle"></i>
                         </a>
-                        <a href="{{ route('barang.edit', $lelang->id) }}" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                          <i class="fas fa-edit"></i>
-                        </a>
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
-                          <i class="fa fa-trash"></i>
-                          </button>
-                        </form>
-                      </div>
                     </td>
+                    @endif
+                    @if (auth()->user()->level == 'petugas')
+                      <td>
+                      <form action="{{ route('lelang.destroy', [$lelang->id]) }}"method="POST">
+                      {{-- <a class="btn btn-primary"href="{{ route('barang.show', $lelang->id)}}">Detail</a>
+                      <a class="btn btn-warning"href="{{ route('barang.edit', $lelang->id)}}">Edit</a> --}}
+
+                      <a class="btn btn-primary btn-sm" href="{{ route('lelang.show', $lelang->id)}}">
+                        <i class="fas fa-eye">
+                        </i>
+                        View
+                    </a>
+                    <a class="btn btn-info btn-sm" href="{{ route('barang.edit', $lelang->barangs_id)}}">
+                        <i class="fas fa-pencil-alt">
+                        </i>
+                        Edit
+                    </a>
+                      @csrf
+                      @method('DELETE')   
+                      <button class="btn btn-danger btn-sm" type="submit"value="Delete">
+                        <i class="fas fa-trash">
+                        </i>
+                        Delete
+                      </button>
+                    </form>
+                  </td>
+                  @else
+                  @endif
                   </tr>
                 @empty
                   <tr>
